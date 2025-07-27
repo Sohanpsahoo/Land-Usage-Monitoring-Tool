@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Classification AI - Implementations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --card-bg: white;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #ecf0f1;
+            --background-color: #1a1a1a;
+            --text-color: #ecf0f1;
+            --card-bg: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1569974498991-d3c12a504f95?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .implementation-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .use-case-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .use-case-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .use-case-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .future-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            border-left: 5px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .future-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .impact-stat {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .nav-button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: var(--box-shadow);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .nav-button {
+            background-color: #3498db;
+            color: white;
+        }
+
+        [data-theme="dark"] .nav-button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Implementations & Use Cases</h1>
+        <p>Discover how our Land Classification AI is transforming environmental monitoring and urban planning</p>
+    </div>
+
+    <div class="container">
+        <section class="implementation-section">
+            <h2 class="section-title">Current Applications</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h3 class="use-case-title">Urban Planning</h3>
+                        <p>Assists city planners in making informed decisions about urban development by identifying land use patterns and monitoring urban sprawl. Helps optimize infrastructure placement and green space allocation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3 class="use-case-title">Environmental Conservation</h3>
+                        <p>Monitors deforestation, tracks changes in vegetation cover, and identifies areas requiring conservation efforts. Supports biodiversity preservation and ecosystem management.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h3 class="use-case-title">Agriculture Management</h3>
+                        <p>Helps farmers and agricultural organizations optimize land use, monitor crop health, and plan irrigation systems. Supports precision agriculture and sustainable farming practices.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3 class="use-case-title">Water Resource Management</h3>
+                        <p>Identifies water bodies, monitors changes in water levels, and helps manage watersheds. Essential for flood prediction and water conservation efforts.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="use-case-title">Industrial Development</h3>
+                        <p>Assists in site selection for industrial facilities, ensuring minimal environmental impact and optimal resource accessibility. Supports sustainable industrial growth.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="use-case-title">Change Detection</h3>
+                        <p>Monitors and analyzes land use changes over time, providing valuable data for policy makers and environmental researchers. Tracks urbanization and natural habitat changes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="impact-stats">
+            <div class="impact-stat">
+                <div class="stat-number">85%</div>
+                <div class="stat-label">Planning Efficiency Increase</div>
+            </div>
+            <div class="impact-stat">
+                <div class="stat-number">60K+</div>
+                <div class="stat-label">Hectares Analyzed</div>
+            </div>
+            <div class="impact-stat">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">Resource Optimization</div>
+            </div>
+        </div>
+
+        <section class="implementation-section">
+            <h2 class="section-title">Future Implementations</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="future-card">
+                        <h3 class="use-case-title">
+                            <i class="fas fa-robot"></i>
+                            AI-Powered Real-time Monitoring
+                        </h3>
+                        <p>Implementation of real-time satellite feed analysis for immediate land use change detection and environmental impact assessment. Integration with IoT sensors for comprehensive environmental monitoring.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="future-card">
+                        <h3 class="use-case-title">
+                            <i class="fas fa-vr-cardboard"></i>
+                            3D Terrain Visualization
+                        </h3>
+                        <p>Advanced 3D modeling of classified land areas for better understanding of topography and land use patterns. Virtual reality integration for immersive land use planning and analysis.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="future-card">
+                        <h3 class="use-case-title">
+                            <i class="fas fa-brain"></i>
+                            Predictive Analytics
+                        </h3>
+                        <p>Machine learning models to predict future land use changes and environmental impacts. Early warning systems for potential environmental risks and urban development challenges.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="future-card">
+                        <h3 class="use-case-title">
+                            <i class="fas fa-mobile-alt"></i>
+                            Mobile Integration
+                        </h3>
+                        <p>Development of mobile applications for field researchers and urban planners. Real-time data collection and analysis capabilities for on-site decision making.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="nav-buttons">
+            <a href="/" class="nav-button">
+                <i class="fas fa-globe"></i> Try Model
+            </a>
+            <a href="/landing" class="nav-button">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="/about" class="nav-button">
+                <i class="fas fa-info-circle"></i> About
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Theme handling code (if needed)
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html> 
