@@ -119,7 +119,7 @@ dmypy.json
 .pyre/
 
 # Machine Learning
-*.h5
+# *.h5  # Commented out to include pre-trained model
 *.pkl
 *.joblib
 models/
