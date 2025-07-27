@@ -13,21 +13,38 @@ A minimalist web application for classifying land types in satellite/aerial imag
 ## Setup
 
 1. Install the required dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Train the model (this will download the EuroSAT dataset and train the model):
-```bash
-python train_model.py
-```
+2. **Option A - Use Pre-trained Model (Recommended):**
+   
+   The repository includes a pre-trained model (`model.h5`) ready to use. Skip to step 3.
+
+   **Option B - Train Your Own Model:**
+   
+   ```bash
+   python train_model.py
+   ```
+   
+   *Note: This will download the EuroSAT dataset (~2GB) and train a new model.*
 
 3. Start the Flask server:
+
 ```bash
 python app.py
 ```
 
 4. Open your web browser and navigate to `http://localhost:5000`
+
+## Dataset Information
+
+**Important**: The training dataset (27,000 images from EuroSAT) is **NOT included** in this repository to keep it lightweight. The dataset will be automatically downloaded when you run `train_model.py`.
+
+- **For immediate use**: A pre-trained model is included
+- **For training**: Run the training script to download the dataset automatically
+- **Dataset size**: ~2GB (27,000 RGB images across 10 land-use classes)
 
 ## Usage
 
